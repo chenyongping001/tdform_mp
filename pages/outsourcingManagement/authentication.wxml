@@ -1,0 +1,7 @@
+<!--pages/ourtsourcingManagement/index.wxml-->
+<mp-form-page title="外协人员身份验证" subtitle="该模块用于信息中心外协人员管理，为了核实身份，需要获取您的手机号码。">
+  <view slot="footer" class="weui-footer__text">Copyright © 2021 chenyongping</view>
+  <view slot="button">
+    <button class="weui-btn" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">授权获取手机号</button>
+  </view>
+</mp-form-page>

@@ -1,0 +1,97 @@
+<!--pages/overtimeIntoAdd/overtimeIntoAdd.wxml-->
+<mp-form-page title="添加工作记录" subtitle="">
+  <view slot="footer" class="weui-footer__text">Copyright © 2021 chenyongping</view>
+  <view slot="button">
+    <button class="weui-btn" type="primary" disabled="{{isSending}}" bindtap="weSubmitForm">提交</button>
+  </view>
+  <!--
+   models:需要校验的表单数据
+   rules：表单校验的规则列表
+   prop="name" 和 data-field="name"的值要一样，不然验证不了
+  -->
+  <!--顶部错误提示-->
+  <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}" delay="1500"></mp-toptips>
+  <mp-form id="form" rules="{{rules}}" models="{{form}}">
+    <mp-cells title="">
+      <mp-cell prop="jlr" title="*记录人">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" disabled="true" bindinput="formInputChange" value="{{form.jlr}}" data-field="jlr" placeholder="自动获取登陆用户姓名" />
+      </mp-cell>
+      <mp-cell title="日期">
+                <picker mode="date" value="{{rq}}" start="2022-01-01" end="2038-01-12" bindchange="bindRqChange">
+                  <view class="weui-select">{{rq}}</view>            
+            </picker>
+      </mp-cell>
+      <mp-cell prop="sbhxt" title="*设备或系统">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.sbhxt}}" data-field="sbhxt" placeholder="填写运维的设备或系统" />
+      </mp-cell>
+      <mp-cell prop="tzr" title="*通知人">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.tzr}}" data-field="tzr" placeholder="此项工作是哪位联系要求的" />
+      </mp-cell>
+      <mp-cell prop="gzxxhyy" title="*故障现象或原因">
+        <textarea class="weui-textarea" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.gzxxhyy}}" data-field="gzxxhyy" placeholder="填写故障现象或工作原因" />
+      </mp-cell>
+      <mp-cell title="*处理开始时间">
+                <picker mode="time" value="08:00" start="07:00" end="18:00" bindchange="bindClkssjChange">
+                  <view class="weui-select">{{clkssj}}</view>            
+            </picker>
+      </mp-cell>
+      <mp-cell prop="idcard" title="*处理过程说明">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.idcard}}" data-field="idcard" placeholder="填写身份证号码" type="idcard" />
+      </mp-cell>
+      <mp-cell prop="idcard" title="*结束时间">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.idcard}}" data-field="idcard" placeholder="填写身份证号码" type="idcard" />
+      </mp-cell>
+      <mp-cell prop="idcard" title="处理完成">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.idcard}}" data-field="idcard" placeholder="填写身份证号码" type="idcard" />
+      </mp-cell>
+      <mp-cell prop="reason" title="技巧分享">
+        <textarea class="weui-textarea" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.reason}}" data-field="reason" placeholder="说明再入厂原因" />
+      </mp-cell>
+    </mp-cells>
+    <mp-cells title="出入门点选择">
+      <mp-checkbox-group prop="gateValue" multi="{{false}}" bindchange="gateChange">
+        <mp-checkbox wx:for="{{gateItems}}" wx:key="index" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+      </mp-checkbox-group>
+    </mp-cells>
+
+
+
+    <mp-cells title="电厂联系人">
+      <mp-cell prop="contact" title="*姓名">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.contact}}" data-field="contact" placeholder="申请将发给该电厂员工" />
+      </mp-cell>
+      <mp-cell prop="contactPhone" title="*手机">
+        <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.contactPhone}}" data-field="contactPhone" placeholder="准确填写电厂员工手机" type="number" />
+      </mp-cell>
+    </mp-cells>
+    <mp-cells title="(*)健康码、行程卡、核酸证明等附件({{files.length}})"></mp-cells>
+    <mp-cell>
+      <view style="margin-left: 32rpx;">
+        <view class="weui-uploader">
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{files}}" wx:key="index">
+                <view class="weui-uploader__file {{item.isUploading?'weui-uploader__file_status':''}}" data-index="{{index}}" bindlongpress="deleteImage" bindtap="previewImage" id="{{item.path}}">
+                  <image class="weui-uploader__img" src="{{item.path}}" mode="aspectFill" />
+                  <view hidden="{{!item.isUploading}}" aria-role="alert" class="weui-uploader__file-content">
+                    <view aria-role="img" aria-label="上传中" class="weui-loading"></view>
+                  </view>
+                </view>
+              </block>
+            </view>
+            <view class="weui-uploader__input-box">
+              <view aria-role="button" aria-label="上传" class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-cell>
+    <mp-cells title="外来新增人员情况登记表">
+      <view slot="footer" class="weui-cells__title weui-cell_link" bindtap="onTemplateTap">防疫登记表模板</view>
+      <mp-cell>
+        <view class="weui-cells__title">{{filename}}</view>
+        <view slot='title' class="weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea" aria-role="button" bindtap="onAddFiles">选择</view>
+      </mp-cell>
+    </mp-cells>
+  </mp-form>
+</mp-form-page>

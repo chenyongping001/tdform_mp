@@ -1,0 +1,9 @@
+<!--pages/mine/mine.wxml-->
+<mp-cells ext-class="my-cells" title="我的申报单">
+    <mp-cell value="无卡临时入厂申报单" hover="{{true}}"  link="true" bindtap="onTempIntoTap">
+            <mp-icon slot="icon" icon="note" color="black" size="{{25}}"></mp-icon>
+    </mp-cell>
+    <mp-cell value="有卡超时再入厂申报单" hover="{{true}}"  link="true" bindtap="onOvertimeIntoTap">
+            <mp-icon slot="icon" icon="note" color="black" size="{{25}}"></mp-icon>
+    </mp-cell>
+</mp-cells>

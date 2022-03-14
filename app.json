@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/load/load",
+    "pages/totp/totpIndex",
+    "pages/totp/totpEdit",
+    "pages/totp/totpForm",
+    "pages/outsourcingManagement/outsourcingIndex",
+    "pages/outsourcingManagement/workbookAdd",
+    "pages/outsourcingManagement/authentication",
+    "pages/overtimeIntoAdd/overtimeIntoAdd",
+    "pages/mine/mine",
+    "pages/index/index",
+    "pages/privacyPolicy/privacyPolicy",
+    "pages/userAgree/userAgree",
+    "pages/myTempInto/myTempInto",
+    "pages/myOvertimeInto/myOvertimeInto",
+    "pages/tempIntoAdd/tempIntoAdd"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "表单",
+    "navigationBarBackgroundColor": "#EDEDED",
+    "backgroundColor": "#EDEDED"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "weui": true
+  },
+  "tabBar": {
+    "list": [
+      {
+      "pagePath": "pages/index/index",
+      "iconPath": "images/forms.png",
+      "selectedIconPath": "images/forms_selected.png",
+      "text": "工作台"
+    },
+    {
+      "pagePath": "pages/mine/mine",
+      "iconPath": "images/me.png",
+      "selectedIconPath": "images/me_selected.png",
+      "text": "我的"
+    }
+  ]
+  }
+}

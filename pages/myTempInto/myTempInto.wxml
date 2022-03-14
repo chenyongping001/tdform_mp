@@ -1,0 +1,52 @@
+<!--pages/myTempInto/myTempInto.wxml-->
+<page-meta root-font-size="system" />
+<view class="page" data-weui-theme="{{theme}}">
+  <mp-navigation-bar back="{{false}}" title="临时入厂申报单" background="#EDEDED">
+    <mp-icon slot='left' icon="back" color="black" bindtap="onBackTap" size="{{15}}"></mp-icon>
+  </mp-navigation-bar>
+
+  <view wx:for="{{tempintoList}}" wx:key="id">
+    <view class="weui-form-preview">
+      <view class="weui-form-preview__hd" aria-role="option">
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">状态</label>
+          <em class="weui-form-preview__value" style="color:{{statusColor[item.status]}}">{{status[item.status]}}</em>
+        </view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">申请时间</label>
+          <text class="weui-form-preview__value">{{item.createtime}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">入厂人员</label>
+          <text class="weui-form-preview__value">{{item.name}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">身份证号码</label>
+          <text class="weui-form-preview__value">{{item.iccard}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">外包单位</label>
+          <text class="weui-form-preview__value">{{item.outCompany}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">入厂理由</label>
+          <text class="weui-form-preview__value">{{item.reason}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">电厂联系人</label>
+          <text class="weui-form-preview__value">{{item.contact}}</text>
+        </view>
+        <view class="weui-form-preview__item">
+          <label class="weui-form-preview__label">联系电话</label>
+          <text class="weui-form-preview__value">{{item.contactPhone}}</text>
+        </view>
+      </view>
+      <view class="weui-form-preview__ft">
+        <view class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="onDelete" data-id='{{item.id}}' hidden="{{(item.status===2 || item.status===3 || item.status===4)? true:false}}">删除</view>
+      </view>
+    </view>
+    <view class="page__bd_short"></view>
+  </view>
+</view>

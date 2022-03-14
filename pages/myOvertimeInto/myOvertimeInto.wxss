@@ -1,0 +1,4 @@
+/* pages/myOvertimeInto/myOvertimeInto.wxss */
+page{
+  background-color: #EFEFEF;
+}
