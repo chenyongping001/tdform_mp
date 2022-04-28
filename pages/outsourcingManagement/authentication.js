@@ -17,20 +17,36 @@ Page({
   },
 
   getPhoneNumber(e) {
+    var that = this
+    if (app.globalData.session) {
+      that.getHfWxUser(app.globalData.session, e.detail.code)
+    } else {
+      app.getSession().then(function (res) {
+        that.getHfWxUser(res, e.detail.code)
+      })
+    }
+  },
+  getHfWxUser(session, code) {
     wx.request({
-      url: `${app.globalData.BASEURL}/wxauth/wx_getPhoneNumber/${e.detail.code}`,
+      url: `${app.globalData.BASEURL}/wxauth/wx_getHfWxUser/${code}/${session}`,
       header: {
         'Authorization': app.globalData.AUTH,
         'content-type': 'application/json'
       },
       success: function (res) {
         if (res.statusCode === 200) {
-          if (res.data.phone_info)
-            console.log(res.data.phone_info.phoneNumber)
+          console.log(res.data)
+          if (res.data.wx_username) {
+            let hfWxUser = res.data.wx_username
+            console.log(hfWxUser)
+            app.globalData.hfWxUser=hfWxUser
+            wx.navigateBack({
+              delta: 1,
+            })
+          }
         }
       }
     })
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

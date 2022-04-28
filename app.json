@@ -1,18 +1,18 @@
 {
   "pages": [
+    "pages/outsourcingManagement/outsourcingIndex",
+    "pages/outsourcingManagement/authentication",
     "pages/load/load",
+    "pages/outsourcingManagement/workbookAdd",
     "pages/totp/totpIndex",
     "pages/totp/totpEdit",
     "pages/totp/totpForm",
-    "pages/outsourcingManagement/outsourcingIndex",
-    "pages/outsourcingManagement/workbookAdd",
-    "pages/outsourcingManagement/authentication",
-    "pages/overtimeIntoAdd/overtimeIntoAdd",
     "pages/mine/mine",
     "pages/index/index",
     "pages/privacyPolicy/privacyPolicy",
     "pages/userAgree/userAgree",
     "pages/myTempInto/myTempInto",
+    "pages/overtimeIntoAdd/overtimeIntoAdd",
     "pages/myOvertimeInto/myOvertimeInto",
     "pages/tempIntoAdd/tempIntoAdd"
   ],
