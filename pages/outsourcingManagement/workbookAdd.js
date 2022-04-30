@@ -10,7 +10,7 @@ Page({
     clkssj: '',
     cljssj: '',
     form: {
-      jlr: 'test',
+      jlr: '',
       yh: '',
       sbhxt: '',
       tzr: '',
@@ -31,7 +31,7 @@ Page({
         maxlength: 10,
         message: '记录人信息获取有误！'
       }]
-    },{
+    }, {
       name: 'yh',
       rules: [{
         required: true,
@@ -163,7 +163,7 @@ Page({
     if (count > 6) {
       msg = '不要上传过多图片!'
     }
-    if(Date.parse(`01/01/2011 ${this.data.clkssj}:00`) > Date.parse(`01/01/2011 ${this.data.cljssj}:00`)){
+    if (Date.parse(`01/01/2011 ${this.data.clkssj}:00`) > Date.parse(`01/01/2011 ${this.data.cljssj}:00`)) {
       msg = '处理开始时间不能晚于处理结束时间！'
     }
     if (msg) {
@@ -184,13 +184,10 @@ Page({
         this.setData({
           isSending: true
         })
-        if (app.globalData.session) {
-          that.submit(app.globalData.session)
-        } else {
-          app.getSession().then(function (res) {
-            that.submit(res)
-          })
-        }
+
+        app.getSession().then(function (res) {
+          that.submit(res)
+        })
       }
     })
   },
@@ -198,31 +195,33 @@ Page({
   submit(session) {
     const that = this
     wx.request({
-      url: `${app.globalData.BASEURL}/covidform/overtimeintos/`,
+      url: `${app.globalData.BASEURL}/outsourcingManagement/workbooks/`,
       header: {
         'Authorization': app.globalData.AUTH,
         'content-type': 'application/json'
       },
       data: {
-        weixinID: session,
-        name: this.data.form.name,
-        iccard: this.data.form.idcard,
-        reason: this.data.form.reason,
-        note: this.data.form.note,
-        gateValue: parseInt(this.data.form.gateValue) + 1,
-        contact: this.data.form.contact,
-        contactPhone: this.data.form.contactPhone,
+        wx_session: session,
+        rq: this.data.rq,
+        yh: this.data.form.yh,
+        sbhxt: this.data.form.sbhxt,
+        tzr: this.data.form.tzr,
+        gzxxhyy: this.data.form.gzxxhyy,
+        clkssj: this.data.clkssj,
+        clgcsm: this.data.form.clgcsm,
+        cljssj: this.data.cljssj,
+        jqfx: this.data.form.jqfx,
       },
       method: "POST",
       success(res) {
         if (res.statusCode === 201) {
           const id = res.data.id
-          //上传登记表
+          //上传文档附件
           if (that.data.files2.length > 0) {
             wx.uploadFile({
               filePath: that.data.files2[0],
               name: 'file',
-              url: `${app.globalData.BASEURL}/covidform/overtimeintos/${id}/files/`,
+              url: `${app.globalData.BASEURL}/outsourcingManagement/workbooks/${id}/files/`,
               header: {
                 'Authorization': app.globalData.AUTH,
                 'content-type': 'multipart/form-data'
@@ -232,6 +231,14 @@ Page({
 
           //上传图片截图
           const length = that.data.files.length
+          if (length < 1) {
+            that.setData({
+              isSending: false
+            })
+            wx.reLaunch({
+              url: '/pages/outsourcingManagement/outsourcingIndex',
+            })
+          }
           for (let i = 0; i < length; i++) {
             const files = that.data.files
             files[i].isUploading = true
@@ -241,7 +248,7 @@ Page({
             wx.uploadFile({
               filePath: that.data.files[i].path,
               name: 'file',
-              url: `${app.globalData.BASEURL}/covidform/overtimeintos/${id}/files/`,
+              url: `${app.globalData.BASEURL}/outsourcingManagement/workbooks/${id}/files/`,
               header: {
                 'Authorization': app.globalData.AUTH,
                 'content-type': 'multipart/form-data'
@@ -256,7 +263,7 @@ Page({
                     isSending: false
                   })
                   wx.reLaunch({
-                    url: '/pages/myOvertimeInto/myOvertimeInto',
+                    url: '/pages/outsourcingManagement/outsourcingIndex',
                   })
                 }
               }
@@ -290,22 +297,6 @@ Page({
       cljssj: `${hour}:${minute}`,
     })
   },
-
-  onTemplateTap(e) {
-    wx.downloadFile({
-      url: `${app.globalData.BASEURL}/uploads/example.doc`,
-      success: function (res) {
-        const filePath = res.tempFilePath
-        wx.openDocument({
-          showMenu: true,
-          filePath: filePath,
-          success: function (res) {
-            console.log('打开文档成功')
-          }
-        })
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -317,7 +308,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //获取本地保存的合法外协用户
+    var that = this
+    app.getUserFromSession().then(res=>{
+      that.setData({
+        ['form.jlr']: app.globalData.hfWxUser
+      })
+    }).catch(function (err) {
+      wx.navigateTo({
+        url: '/pages/outsourcingManagement/authentication',
+      })
+    })
+    
   },
 
   /**

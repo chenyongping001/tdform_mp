@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/load/load",
+    "pages/index/index",
+    "pages/outsourcingManagement/workbookAdd",
     "pages/outsourcingManagement/outsourcingIndex",
     "pages/outsourcingManagement/authentication",
-    "pages/load/load",
-    "pages/outsourcingManagement/workbookAdd",
     "pages/totp/totpIndex",
     "pages/totp/totpEdit",
     "pages/totp/totpForm",
     "pages/mine/mine",
-    "pages/index/index",
     "pages/privacyPolicy/privacyPolicy",
     "pages/userAgree/userAgree",
     "pages/myTempInto/myTempInto",

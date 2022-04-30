@@ -18,6 +18,12 @@
       </view>
       <view class="weui-grid__label">有卡超时再入厂</view>
     </navigator>
+    <navigator class="weui-grid" aria-role="button" url="/pages/outsourcingManagement/outsourcingIndex">
+      <view class="weui-grid__icon">
+        <image class="weui-grid__icon" src="/images/forms.png" alt></image>
+      </view>
+      <view class="weui-grid__label">外协人员管理</view>
+    </navigator>
   </view>
   <view class="weui-panel_access">
     <view class="weui-panel__hd grid_color">常用工具</view>

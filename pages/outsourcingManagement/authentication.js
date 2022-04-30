@@ -18,13 +18,9 @@ Page({
 
   getPhoneNumber(e) {
     var that = this
-    if (app.globalData.session) {
-      that.getHfWxUser(app.globalData.session, e.detail.code)
-    } else {
-      app.getSession().then(function (res) {
-        that.getHfWxUser(res, e.detail.code)
-      })
-    }
+    app.getSession().then(function (res) {
+      that.getHfWxUser(res, e.detail.code)
+    })
   },
   getHfWxUser(session, code) {
     wx.request({
@@ -35,17 +31,26 @@ Page({
       },
       success: function (res) {
         if (res.statusCode === 200) {
-          console.log(res.data)
           if (res.data.wx_username) {
             let hfWxUser = res.data.wx_username
-            console.log(hfWxUser)
-            app.globalData.hfWxUser=hfWxUser
+            app.globalData.hfWxUser = hfWxUser
+            // wx.setStorageSync("tdform-hfwxuser", hfWxUser)
             wx.navigateBack({
               delta: 1,
             })
           }
         }
+        wx.showToast({
+          title: "您未被授权进入！",
+          icon: 'error',
+          duration: 2000
+        })
       }
+    })
+  },
+  onCancel() {
+    wx.reLaunch({
+      url: '/pages/index/index',
     })
   },
   /**

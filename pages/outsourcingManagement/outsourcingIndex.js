@@ -1,5 +1,5 @@
 // pages/outsourcingManagement/outsourcingIndex.js
-const app = getApp()
+
 Page({
 
   /**
@@ -27,13 +27,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const that = this
+    const app = getApp()
     //获取本地保存的合法外协用户
-    if (!app.globalData.hfWxUser) {
+    app.getUserFromSession().then(res=>{}).catch(function (err) {
       wx.navigateTo({
         url: '/pages/outsourcingManagement/authentication',
       })
-    }
+    })
   },
 
   /**

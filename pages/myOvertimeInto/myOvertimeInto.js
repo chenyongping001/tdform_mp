@@ -7,9 +7,9 @@ Page({
    */
   data: {
     overtimeintoList: [],
-    status: ['待处理','无此持卡人','找不到联系人', '已生成申请单', '审批中', '通过',  '已删除','施工证已过期'],
+    status: ['待处理', '无此持卡人', '找不到联系人', '已生成申请单', '审批中', '通过', '已删除', '施工证已过期'],
     statusColor: ['rgb(165, 82, 10', 'red', 'red', 'midnightblue', 'midnightblue', 'lightseagreen', 'red', 'red'],
-    gateItems:['一号门','厂前区']
+    gateItems: ['一号门', '厂前区']
   },
 
   /**
@@ -23,21 +23,18 @@ Page({
         overtimeintoList: list
       })
     }
-    if (app.globalData.session) {
-      that.reDraw(app.globalData.session)
-    } else {
-       app.getSession().then(function (res) {
-         that.reDraw(res)
-      })
-    }
+    app.getSession().then(function (res) {
+      that.reDraw(res)
+    })
+
   },
 
   reDraw(session) {
-    const that=this
+    const that = this
     wx.request({
       url: `${app.globalData.BASEURL}/covidform/overtimeintos/?weixinid=${session}`,
-      header:{
-        'Authorization':app.globalData.AUTH,
+      header: {
+        'Authorization': app.globalData.AUTH,
         'content-type': 'application/json'
       },
       success: function (res) {
@@ -62,8 +59,8 @@ Page({
           let id = e.currentTarget.dataset.id
           wx.request({
             url: `${app.globalData.BASEURL}/covidform/overtimeintos/${id}`,
-            header:{
-              'Authorization':app.globalData.AUTH,
+            header: {
+              'Authorization': app.globalData.AUTH,
               'content-type': 'application/json'
             },
             method: 'DELETE',
@@ -74,12 +71,12 @@ Page({
               })
             }
           })
-        } else if (res.cancel) {}
+        } else if (res.cancel) { }
       }
     })
   },
 
-  onBackTap(e){
+  onBackTap(e) {
     wx.reLaunch({
       url: '/pages/mine/mine',
     })

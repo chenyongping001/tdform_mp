@@ -21,72 +21,72 @@ Page({
     files2: [],
     filename: '',
     gateItems: [{
-        name: '一号门',
-        value: 0,
-        checked: true
-      },
-      {
-        name: '厂前区',
-        value: 1
-      }
+      name: '一号门',
+      value: 0,
+      checked: true
+    },
+    {
+      name: '厂前区',
+      value: 1
+    }
     ],
     errorMsg: '', // 验证表单显示错误信息
     rules: [{
-        name: 'name',
-        rules: [{
-          required: true,
-          message: '请填写再入厂人员姓名'
-        }, {
-          maxlength: 10,
-          message: '请输入正确的入厂人员姓名'
-        }]
+      name: 'name',
+      rules: [{
+        required: true,
+        message: '请填写再入厂人员姓名'
+      }, {
+        maxlength: 10,
+        message: '请输入正确的入厂人员姓名'
+      }]
+    },
+    {
+      name: 'idcard',
+      rules: {
+        required: true,
+        message: '请填写再入厂人员身份证号码'
       },
-      {
-        name: 'idcard',
-        rules: {
-          required: true,
-          message: '请填写再入厂人员身份证号码'
-        },
-      },
+    },
 
-      {
-        name: 'reason',
-        rules: {
-          required: true,
-          message: '请填写入厂说明'
-        }
-      },
-      {
-        name: "note",
-        rules: {}
-      },
-      {
-        name: "gateValue",
-        rules: {
-          range: [0, 1],
-          message: '出入门点选择不正确'
-        }
-      },
-      {
-        name: 'contact',
-        rules: [{
-          required: true,
-          message: '请填写电厂联系人姓名'
-        }, {
-          maxlength: 10,
-          message: '请输入正确的联系人姓名'
-        }]
-      },
-      {
-        name: 'contactPhone',
-        rules: [{
-          required: true,
-          message: '请填写电厂联系人手机号码'
-        }, {
-          mobile: true,
-          message: '电厂联系人手机号码格式不对'
-        }]
-      },
+    {
+      name: 'reason',
+      rules: {
+        required: true,
+        message: '请填写入厂说明'
+      }
+    },
+    {
+      name: "note",
+      rules: {}
+    },
+    {
+      name: "gateValue",
+      rules: {
+        range: [0, 1],
+        message: '出入门点选择不正确'
+      }
+    },
+    {
+      name: 'contact',
+      rules: [{
+        required: true,
+        message: '请填写电厂联系人姓名'
+      }, {
+        maxlength: 10,
+        message: '请输入正确的联系人姓名'
+      }]
+    },
+    {
+      name: 'contactPhone',
+      rules: [{
+        required: true,
+        message: '请填写电厂联系人手机号码'
+      }, {
+        mobile: true,
+        message: '电厂联系人手机号码格式不对'
+      }]
+    },
     ],
   },
   chooseImage: function (e) {
@@ -225,13 +225,11 @@ Page({
         this.setData({
           isSending: true
         })
-        if (app.globalData.session) {
-          that.submit(app.globalData.session)
-        } else {
-          app.getSession().then(function (res) {
-            that.submit(res)
-          })
-        }
+
+        app.getSession().then(function (res) {
+          that.submit(res)
+        })
+
       }
     })
   },
@@ -320,7 +318,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) { },
 
   onTemplateTap(e) {
     wx.downloadFile({

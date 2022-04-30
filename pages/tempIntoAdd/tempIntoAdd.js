@@ -19,13 +19,13 @@ Page({
     contactPhone: "",
     files: [],
     isHealth: ['否', '是'],
-    days: ['一天', '二天','三天'],
+    days: ['一天', '二天', '三天'],
     isOutProvince: ['否', '是'],
     healthValue: 1,
     daysValue: 0,
     outProvinceValue: 0,
     files2: [],
-    filename:'',
+    filename: '',
   },
   onNameInput(e) {
     this.setData({
@@ -67,29 +67,29 @@ Page({
       contactPhone: e.detail.value
     })
   },
-  onAddFiles(e){
+  onAddFiles(e) {
     const that = this
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
-      extension:['doc','docx','xls','xlsx'],
-      success (res) {
+      extension: ['doc', 'docx', 'xls', 'xlsx'],
+      success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFiles
         that.setData({
-          filename:tempFilePaths[0].name,
+          filename: tempFilePaths[0].name,
           files2: [tempFilePaths[0].path]
         })
       }
     })
   },
-  onTemplateTap(e){
+  onTemplateTap(e) {
     wx.downloadFile({
       url: `${app.globalData.BASEURL}/uploads/example.doc`,
       success: function (res) {
         const filePath = res.tempFilePath
         wx.openDocument({
-          showMenu:true,
+          showMenu: true,
           filePath: filePath,
           success: function (res) {
             console.log('打开文档成功')
@@ -101,12 +101,12 @@ Page({
   chooseImage: function (e) {
     var that = this;
     wx.chooseImage({
-      count:6,
+      count: 6,
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        const files = res.tempFilePaths.map(n=>({isUploading:false,path:n}))
+        const files = res.tempFilePaths.map(n => ({ isUploading: false, path: n }))
         // 添加一个属性isUploading,用来表示是否在上传过程中
         that.setData({
           files: that.data.files.concat(files)
@@ -117,7 +117,7 @@ Page({
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.files.map(n=>n.path) // 需要预览的图片http链接列表
+      urls: this.data.files.map(n => n.path) // 需要预览的图片http链接列表
     })
   },
   deleteImage: function (e) {
@@ -149,7 +149,7 @@ Page({
       daysValue: e.detail.value
     })
   },
-  
+
   bindOutProvinceChange: function (e) {
     this.setData({
       outProvinceValue: e.detail.value
@@ -248,21 +248,18 @@ Page({
     this.setData({
       isSending: true
     })
-    if (app.globalData.session) {
-      that.submit(app.globalData.session)
-    }
-    else{
-      app.getSession().then(function(res){
-        that.submit(res)
-      })
-    }
+
+    app.getSession().then(function (res) {
+      that.submit(res)
+    })
+
   },
-  submit(session){
-    const that =this
+  submit(session) {
+    const that = this
     wx.request({
       url: `${app.globalData.BASEURL}/covidform/tempintos/`,
-      header:{
-        'Authorization':app.globalData.AUTH,
+      header: {
+        'Authorization': app.globalData.AUTH,
         'content-type': 'application/json'
       },
       data: {
@@ -270,7 +267,7 @@ Page({
         name: this.data.name,
         iccard: this.data.idcard,
         healthValue: this.data.healthValue,
-        daysValue: parseInt(this.data.daysValue)+1,//前景需要对应,注意要用prseInt转换str
+        daysValue: parseInt(this.data.daysValue) + 1,//前景需要对应,注意要用prseInt转换str
         outProvinceValue: this.data.outProvinceValue,
         outCompany: this.data.outCompany,
         project: this.data.project,
@@ -284,14 +281,14 @@ Page({
         if (res.statusCode === 201) {
           const id = res.data.id
           //上传登记表
-          if(that.data.files2.length>0){
+          if (that.data.files2.length > 0) {
             wx.uploadFile({
               filePath: that.data.files2[0],
               name: 'file',
               url: `${app.globalData.BASEURL}/covidform/tempintos/${id}/files/`,
-              header:{
-                'Authorization':app.globalData.AUTH,
-                'content-type':'multipart/form-data'
+              header: {
+                'Authorization': app.globalData.AUTH,
+                'content-type': 'multipart/form-data'
               },
             })
           }
@@ -300,22 +297,22 @@ Page({
           const length = that.data.files.length
           for (let i = 0; i < length; i++) {
             const files = that.data.files
-            files[i].isUploading=true
+            files[i].isUploading = true
             that.setData({
-              files:files
+              files: files
             })
             wx.uploadFile({
               filePath: that.data.files[i].path,
               name: 'file',
               url: `${app.globalData.BASEURL}/covidform/tempintos/${id}/files/`,
-              header:{
-                'Authorization':app.globalData.AUTH,
-                'content-type':'multipart/form-data'
+              header: {
+                'Authorization': app.globalData.AUTH,
+                'content-type': 'multipart/form-data'
               },
               complete(res) {
-                files[i].isUploading=false
+                files[i].isUploading = false
                 that.setData({
-                  files:files
+                  files: files
                 })
                 if (i === (length - 1)) {
                   that.setData({
@@ -335,7 +332,7 @@ Page({
           })
           wx.showToast({
             title: "出错了，请稍后！",
-            icon:"error",
+            icon: "error",
             duration: 5000
           })
         }
@@ -343,7 +340,7 @@ Page({
     })
   },
 
-  onBackTap(e){
+  onBackTap(e) {
     wx.reLaunch({
       url: '/pages/index/index',
     })
@@ -358,7 +355,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () { },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -370,7 +367,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

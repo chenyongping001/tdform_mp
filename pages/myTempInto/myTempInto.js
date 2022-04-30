@@ -22,21 +22,18 @@ Page({
         tempintoList: list
       })
     }
-    if (app.globalData.session) {
-      that.reDraw(app.globalData.session)
-    } else {
-       app.getSession().then(function (res) {
-         that.reDraw(res)
-      })
-    }
+
+    app.getSession().then(function (res) {
+      that.reDraw(res)
+    })
   },
 
   reDraw(session) {
-    const that=this
+    const that = this
     wx.request({
       url: `${app.globalData.BASEURL}/covidform/tempintos/?weixinid=${session}`,
-      header:{
-        'Authorization':app.globalData.AUTH,
+      header: {
+        'Authorization': app.globalData.AUTH,
         'content-type': 'application/json'
       },
       success: function (res) {
@@ -61,8 +58,8 @@ Page({
           let id = e.currentTarget.dataset.id
           wx.request({
             url: `${app.globalData.BASEURL}/covidform/tempintos/${id}`,
-            header:{
-              'Authorization':app.globalData.AUTH,
+            header: {
+              'Authorization': app.globalData.AUTH,
               'content-type': 'application/json'
             },
             method: 'DELETE',
@@ -73,12 +70,12 @@ Page({
               })
             }
           })
-        } else if (res.cancel) {}
+        } else if (res.cancel) { }
       }
     })
   },
 
-  onBackTap(e){
+  onBackTap(e) {
     wx.reLaunch({
       url: '/pages/mine/mine',
     })
