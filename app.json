@@ -1,46 +1,47 @@
 {
-  "pages": [
-    "pages/load/load",
-    "pages/index/index",
-    "pages/outsourcingManagement/workbookAdd",
-    "pages/outsourcingManagement/outsourcingIndex",
-    "pages/outsourcingManagement/authentication",
-    "pages/totp/totpIndex",
-    "pages/totp/totpEdit",
-    "pages/totp/totpForm",
-    "pages/mine/mine",
-    "pages/privacyPolicy/privacyPolicy",
-    "pages/userAgree/userAgree",
-    "pages/myTempInto/myTempInto",
-    "pages/overtimeIntoAdd/overtimeIntoAdd",
-    "pages/myOvertimeInto/myOvertimeInto",
-    "pages/tempIntoAdd/tempIntoAdd"
-  ],
-  "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "表单",
-    "navigationBarBackgroundColor": "#EDEDED",
-    "backgroundColor": "#EDEDED"
-  },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json",
-  "useExtendedLib": {
-    "weui": true
-  },
-  "tabBar": {
-    "list": [
-      {
-      "pagePath": "pages/index/index",
-      "iconPath": "images/forms.png",
-      "selectedIconPath": "images/forms_selected.png",
-      "text": "工作台"
+    "pages": [
+        "pages/load/load",
+        "pages/outsourcingManagement/workbook/workbookAdd",
+        "pages/outsourcingManagement/outsourcingIndex",
+        "pages/outsourcingManagement/workbook/workbooks",
+        "pages/outsourcingManagement/workbook/workbookView",
+        "pages/index/index",
+        "pages/outsourcingManagement/authentication",
+        "pages/totp/totpIndex",
+        "pages/totp/totpEdit",
+        "pages/totp/totpForm",
+        "pages/mine/mine",
+        "pages/privacyPolicy/privacyPolicy",
+        "pages/userAgree/userAgree",
+        "pages/myTempInto/myTempInto",
+        "pages/overtimeIntoAdd/overtimeIntoAdd",
+        "pages/myOvertimeInto/myOvertimeInto",
+        "pages/tempIntoAdd/tempIntoAdd"
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "表单",
+        "navigationBarBackgroundColor": "#EDEDED",
+        "backgroundColor": "#EDEDED"
     },
-    {
-      "pagePath": "pages/mine/mine",
-      "iconPath": "images/me.png",
-      "selectedIconPath": "images/me_selected.png",
-      "text": "我的"
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "useExtendedLib": {
+        "weui": true
+    },
+    "tabBar": {
+        "list": [{
+                "pagePath": "pages/index/index",
+                "iconPath": "images/forms.png",
+                "selectedIconPath": "images/forms_selected.png",
+                "text": "工作台"
+            },
+            {
+                "pagePath": "pages/mine/mine",
+                "iconPath": "images/me.png",
+                "selectedIconPath": "images/me_selected.png",
+                "text": "我的"
+            }
+        ]
     }
-  ]
-  }
 }

@@ -27,9 +27,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const app = getApp()
     //获取本地保存的合法外协用户
-    app.getUserFromSession().then(res=>{}).catch(function (err) {
+    getApp().getUserFromSession().then(res=>{}).catch(function (err) {
       wx.navigateTo({
         url: '/pages/outsourcingManagement/authentication',
       })

@@ -1,0 +1,30 @@
+<!--pages/outsourcingManagement/workbooks.wxml-->
+<wxs src='../../../utils/string.wxs' module="tools"></wxs>
+
+<view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+    <form class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input  type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchConfirm"/>
+            <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
+        </view>
+        <label class="weui-search-bar__label" bindtap="showInput">
+            <i class="weui-icon-search"></i>
+            <span class="weui-search-bar__text">搜索</span>
+        </label>
+    </form>
+    <view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+    <view aria-role="button" class="weui-cell__ft search_add" bindtap="onAddTap" wx:if="{{canWxUserAdd}}">添加</view>
+</view>
+
+
+
+<view wx:for="{{workbookList}}" wx:key="id">
+    <mp-cell hover="{{true}}" link="true" data-workbook_id="{{item.id}}" bindtap="onWorkbookTap">
+        <view>{{item.yh}}-{{item.sbhxt.length<=10?item.sbhxt:tools.my_slice(item.sbhxt,0,10)+'...'}}-{{item.gzxxhyy.length<=20?item.gzxxhyy:tools.my_slice(item.gzxxhyy,0,20)+'...'}}<mp-icon icon="camera" type="field" color="green" size="{{18}}" wx:if="{{item.files.length > 0}}"/></view>
+                <view class="page__desc">时间：{{item.rq}} {{tools.my_slice(item.clkssj,0,5)}}--{{tools.my_slice(item.cljssj,0,5)}}
+                </view>
+                <view class="page__desc">处理人：{{item.wx_username}}
+                </view>
+    </mp-cell>
+</view>

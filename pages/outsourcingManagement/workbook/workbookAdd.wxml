@@ -51,7 +51,7 @@
       </mp-cell>
     </mp-cells>
 
-    <mp-cells title="(*)现场截图({{files.length}})"></mp-cells>
+    <mp-cells title="附图({{files.length}})"></mp-cells>
     <mp-cell>
       <view style="margin-left: 32rpx;">
         <view class="weui-uploader">
@@ -73,11 +73,5 @@
         </view>
       </view>
     </mp-cell>
-    <mp-cells title="补充附件">
-      <mp-cell>
-        <view class="weui-cells__title">{{filename}}</view>
-        <view slot='title' class="weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea" aria-role="button" bindtap="onAddFiles">选择</view>
-      </mp-cell>
-    </mp-cells>
   </mp-form>
 </mp-form-page>

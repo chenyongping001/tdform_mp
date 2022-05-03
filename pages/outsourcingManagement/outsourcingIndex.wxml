@@ -6,41 +6,29 @@
     <view class="weui-panel__hd grid_color">外协人员工作台</view>
   </view>
   <view class="weui-grids" >
-    <navigator class="weui-grid" aria-role="button" url="/pages/outsourcingManagement/workbookAdd">
+    <navigator class="weui-grid" aria-role="button" url="/pages/outsourcingManagement/workbook/workbooks">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
       <view class="weui-grid__label">工作记录</view>
     </navigator>
-    <navigator class="weui-grid" aria-role="button" url="/pages/overtimeIntoAdd/overtimeIntoAdd">
+    <navigator class="weui-grid" aria-role="button" url="#">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
       <view class="weui-grid__label">出勤打卡</view>
     </navigator>
-    <navigator class="weui-grid" aria-role="button" url="/pages/overtimeIntoAdd/overtimeIntoAdd">
+    <navigator class="weui-grid" aria-role="button" url="#">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
       <view class="weui-grid__label">请假申请</view>
     </navigator>
-    <navigator class="weui-grid" aria-role="button" url="/pages/overtimeIntoAdd/overtimeIntoAdd">
+    <navigator class="weui-grid" aria-role="button" url="#">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
       <view class="weui-grid__label">加班记录</view>
-    </navigator>
-    <navigator class="weui-grid" aria-role="button" url="/pages/overtimeIntoAdd/overtimeIntoAdd">
-      <view class="weui-grid__icon">
-        <image class="weui-grid__icon" src="/images/forms.png" alt></image>
-      </view>
-      <view class="weui-grid__label">安全学习</view>
-    </navigator>
-    <navigator class="weui-grid" aria-role="button" url="/pages/overtimeIntoAdd/overtimeIntoAdd">
-      <view class="weui-grid__icon">
-        <image class="weui-grid__icon" src="/images/forms.png" alt></image>
-      </view>
-      <view class="weui-grid__label">月度小结</view>
     </navigator>
   </view>
 </view>

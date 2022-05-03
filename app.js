@@ -62,6 +62,7 @@ App({
               if (res2.data.wx_username) {
                 let hfWxUser = res2.data.wx_username
                 that.globalData.hfWxUser = hfWxUser
+                that.globalData.canWxUserAdd= res2.data.can_add
                 resolve(hfWxUser)
               }
               else {
@@ -83,5 +84,6 @@ App({
     statusBarHeight: 0,
     // 20220427 添加
     hfWxUser: null,
+    canWxUserAdd:false,
   },
 })

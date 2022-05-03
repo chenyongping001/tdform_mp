@@ -1,0 +1,60 @@
+<!--pages/overtimeIntoAdd/overtimeIntoAdd.wxml-->
+<wxs src='../../../utils/string.wxs' module="tools"></wxs>
+
+<mp-form-page title="查看工作记录-({{workbook.id}})" subtitle="">
+  <view slot="footer" class="weui-footer__text">Copyright © 2022 chenyongping</view>
+  <view slot="button">
+    <button class="weui-btn" type="primary"  bindtap="weSubmitForm">返回</button>
+  </view>
+  <mp-form id="form">
+    <mp-cells title="">
+      <mp-cell title="*记录人">
+        <view class="weui-input__placeholder">{{workbook.wx_username}}</view>
+      </mp-cell>
+      <mp-cell title="*日期">
+        <view class="weui-input__placeholder">{{workbook.rq}}</view>
+      </mp-cell>
+      <mp-cell title="*用户姓名">
+        <view class="weui-input__placeholder">{{workbook.yh}}</view>
+      </mp-cell>
+      <mp-cell title="*设备或系统">
+        <view class="weui-input__placeholder">{{workbook.sbhxt}}</view>
+      </mp-cell>
+      <mp-cell title="*通知人">
+        <view class="weui-input__placeholder">{{workbook.tzr}}</view>
+      </mp-cell>
+      <mp-cell title="*故障现象或原因">
+        <view class="weui-input__placeholder">{{workbook.gzxxhyy}}</view>
+      </mp-cell>
+      <mp-cell title="*处理开始时间">
+        <view class="weui-input__placeholder">{{tools.my_slice(workbook.clkssj,0,5)}}</view>
+      </mp-cell>
+      <mp-cell title="*处理过程说明">
+        <view class="weui-input__placeholder">{{workbook.clgcsm}}</view>
+      </mp-cell>
+      <mp-cell title="*结束时间">
+        <view class="weui-input__placeholder">{{tools.my_slice(workbook.cljssj,0,5)}}</view>
+      </mp-cell>
+      <mp-cell title="技巧分享">
+        <view class="weui-input__placeholder">{{workbook.jqfx}}</view>
+      </mp-cell>
+    </mp-cells>
+
+    <mp-cells title="附图({{workbook.files.length}})"></mp-cells>
+    <mp-cell>
+      <view style="margin-left: 32rpx;">
+        <view class="weui-uploader">
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{workbook.files}}" wx:key="index">
+                <view class="weui-uploader__file" data-index="{{index}}" bindtap="previewImage" id="{{baseurl+item}}">
+                  <image class="weui-uploader__img" src="{{baseurl+item}}" mode="aspectFill" />
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-cell>
+  </mp-form>
+</mp-form-page>

@@ -103,22 +103,7 @@ Page({
       }
     })
   },
-  onAddFiles(e) {
-    const that = this
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'file',
-      extension: ['doc', 'docx', 'xls', 'xlsx'],
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFiles
-        that.setData({
-          filename: tempFilePaths[0].name,
-          files2: [tempFilePaths[0].path]
-        })
-      }
-    })
-  },
+
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
@@ -202,6 +187,7 @@ Page({
       },
       data: {
         wx_session: session,
+        wx_username:this.data.form.jlr,
         rq: this.data.rq,
         yh: this.data.form.yh,
         sbhxt: this.data.form.sbhxt,
@@ -216,18 +202,6 @@ Page({
       success(res) {
         if (res.statusCode === 201) {
           const id = res.data.id
-          //上传文档附件
-          if (that.data.files2.length > 0) {
-            wx.uploadFile({
-              filePath: that.data.files2[0],
-              name: 'file',
-              url: `${app.globalData.BASEURL}/outsourcingManagement/workbooks/${id}/files/`,
-              header: {
-                'Authorization': app.globalData.AUTH,
-                'content-type': 'multipart/form-data'
-              },
-            })
-          }
 
           //上传图片截图
           const length = that.data.files.length
@@ -236,7 +210,7 @@ Page({
               isSending: false
             })
             wx.reLaunch({
-              url: '/pages/outsourcingManagement/outsourcingIndex',
+              url: '/pages/outsourcingManagement/workbooks',
             })
           }
           for (let i = 0; i < length; i++) {
@@ -263,7 +237,7 @@ Page({
                     isSending: false
                   })
                   wx.reLaunch({
-                    url: '/pages/outsourcingManagement/outsourcingIndex',
+                    url: '/pages/outsourcingManagement/workbook/workbooks',
                   })
                 }
               }
@@ -314,6 +288,11 @@ Page({
       that.setData({
         ['form.jlr']: app.globalData.hfWxUser
       })
+      if(!app.globalData.canWxUserAdd){
+          wx.navigateTo({
+            url: '/pages/outsourcingManagement/workbook/workbooks',
+          })
+      }
     }).catch(function (err) {
       wx.navigateTo({
         url: '/pages/outsourcingManagement/authentication',
