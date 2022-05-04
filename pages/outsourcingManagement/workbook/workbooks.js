@@ -78,6 +78,11 @@ Page({
           url: '/pages/outsourcingManagement/workbook/workbookAdd',
         })
     },
+    onBackTap(e) {
+        wx.reLaunch({
+          url: '/pages/outsourcingManagement/outsourcingIndex',
+        })
+      },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

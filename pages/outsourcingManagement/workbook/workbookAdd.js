@@ -134,7 +134,6 @@ Page({
     const {
       field
     } = e.currentTarget.dataset
-    console.log(field)
     this.setData({
       [`form.${field}`]: e.detail.value
     })
@@ -210,7 +209,7 @@ Page({
               isSending: false
             })
             wx.reLaunch({
-              url: '/pages/outsourcingManagement/workbooks',
+              url: '/pages/outsourcingManagement/workbook/workbooks',
             })
           }
           for (let i = 0; i < length; i++) {

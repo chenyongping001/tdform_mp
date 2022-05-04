@@ -1,6 +1,11 @@
 <!--pages/index/index.wxml-->
 <!--WXML示例代码-->
 <page-meta root-font-size="system" />
+
+<mp-navigation-bar back="{{false}}" title="外协人员工作台" background="#EDEDED">
+    <mp-icon slot='left' icon="back" color="black" bindtap="onBackTap" size="{{15}}"></mp-icon>
+</mp-navigation-bar>
+
 <view class="page" data-weui-theme="{{theme}}">
   <view class="weui-panel weui-panel_access">
     <view class="weui-panel__hd grid_color">外协人员工作台</view>
@@ -12,19 +17,19 @@
       </view>
       <view class="weui-grid__label">工作记录</view>
     </navigator>
-    <navigator class="weui-grid" aria-role="button" url="#">
+    <navigator class="weui-grid" aria-role="button" url="#" wx:if="{{false}}">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
       <view class="weui-grid__label">出勤打卡</view>
     </navigator>
-    <navigator class="weui-grid" aria-role="button" url="#">
+    <navigator class="weui-grid" aria-role="button" url="#" wx:if="{{false}}">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
       <view class="weui-grid__label">请假申请</view>
     </navigator>
-    <navigator class="weui-grid" aria-role="button" url="#">
+    <navigator class="weui-grid" aria-role="button" url="#" wx:if="{{false}}">
       <view class="weui-grid__icon">
         <image class="weui-grid__icon" src="/images/forms.png" alt></image>
       </view>
