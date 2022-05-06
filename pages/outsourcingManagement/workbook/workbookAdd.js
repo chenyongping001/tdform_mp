@@ -79,7 +79,7 @@ Page({
     const {
       field
     } = e.currentTarget.dataset
-    console.log(e.currentTarget)
+    // console.log(e.currentTarget)
     this.setData({
       [`${field}`]: e.detail.value
     })

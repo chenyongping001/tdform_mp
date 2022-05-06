@@ -1,0 +1,87 @@
+<mp-form-page title="车辆临时入厂申报" subtitle="请正确填写相关信息，附件资料必须包括车辆行驶证，特种施工车辆必须上传检验合格证及特种设备作业人员证照片，特殊施工车辆请填写驾驶员。疫情期间必须上传身份证、当天健康码、行程码、核酸检测报告等附件资料，并请上传疫情防疫控登记表。">
+    <view slot="footer" class="weui-footer__text">Copyright © 2022 chenyongping</view>
+    <view slot="button">
+        <button class="weui-btn" type="primary" disabled="{{isSending}}" bindtap="weSubmitForm">提交</button>
+    </view>
+    <!--
+   models:需要校验的表单数据
+   rules：表单校验的规则列表
+   prop="name" 和 data-field="name"的值要一样，不然验证不了
+  -->
+    <!--顶部错误提示-->
+    <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}" delay="1500"></mp-toptips>
+    <mp-form id="form" rules="{{rules}}" models="{{form}}">
+        <mp-cells title="临时入厂车辆信息">
+            <mp-cell prop="gcmc" title="*工程名称">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.gcmc}}" data-field="gcmc" placeholder="填写工程项目名称" />
+            </mp-cell>
+            <mp-cell prop="sgdw" title="*施工单位">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.sgdw}}" data-field="sgdw" placeholder="填写施工单位" />
+            </mp-cell>
+            <mp-cell title="*计划进厂开始日期">
+                <picker mode="date" value="{{jhjcksrq}}" data-field="jhjcksrq" start="2022-01-01" end="2038-01-12" bindchange="formInputChange">
+                    <view class="weui-select">{{form.jhjcksrq}}</view>
+                </picker>
+            </mp-cell>
+            <mp-cell title="*计划进厂结束日期">
+                <picker mode="date" value="{{jhjcjsrq}}" data-field="jhjcjsrq" start="2022-01-01" end="2038-01-12" bindchange="formInputChange">
+                    <view class="weui-select">{{form.jhjcjsrq}}</view>
+                </picker>
+            </mp-cell>
+            <mp-cell prop="cx" title="*车型">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.cx}}" data-field="cx" placeholder="填写车辆型号" />
+            </mp-cell>
+            <mp-cell prop="cphm" title="*车牌号码">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.cphm}}" data-field="cphm" placeholder="填写车牌号码" />
+            </mp-cell>
+            <mp-cell title="*是否特殊施工车辆">
+                <picker mode="selector" value="{{form.tssgcl}}" range="{{tssgclDesc}}" data-field="tssgcl"  bindchange="formInputChange">
+                    <view class="weui-select">{{tssgclDesc[form.tssgcl]}}</view>
+                </picker>
+            </mp-cell>
+            <mp-cell prop="jsy" title="驾驶员">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.jsy}}" data-field="jsy" placeholder="填写驾驶员" />
+            </mp-cell>
+            <mp-cell prop="sqly" title="*申请理由">
+                <textarea class="weui-textarea" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.sqly}}" data-field="sqly" placeholder="说明车辆入厂原因" />
+            </mp-cell>
+        </mp-cells>
+        <mp-cells title="电厂联系人">
+            <mp-cell prop="dclxrxm" title="*姓名">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.dclxrxm}}" data-field="dclxrxm" placeholder="申请将发给该电厂员工" />
+            </mp-cell>
+            <mp-cell prop="dclxrsj" title="*手机">
+                <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.dclxrsj}}" data-field="dclxrsj" placeholder="准确填写电厂员工手机" type="number" />
+            </mp-cell>
+        </mp-cells>
+        <mp-cells title="行驶证、身份证、健康码、行程卡、核酸证明等附件({{files.length}})"></mp-cells>
+        <mp-cell>
+            <view style="margin-left: 32rpx;">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files" id="uploaderFiles">
+                            <block wx:for="{{files}}" wx:key="index">
+                                <view class="weui-uploader__file {{item.isUploading?'weui-uploader__file_status':''}}" data-index="{{index}}" bindlongpress="deleteImage" bindtap="previewImage" id="{{item.path}}">
+                                    <image class="weui-uploader__img" src="{{item.path}}" mode="aspectFill" />
+                                    <view hidden="{{!item.isUploading}}" aria-role="alert" class="weui-uploader__file-content">
+                                        <view aria-role="img" aria-label="上传中" class="weui-loading"></view>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                        <view class="weui-uploader__input-box">
+                            <view aria-role="button" aria-label="上传" class="weui-uploader__input" bindtap="chooseImage"></view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </mp-cell>
+        <mp-cells title="外来人员疫情防控情况登记表（一人一表）">
+            <view slot="footer" class="weui-cells__title weui-cell_link" bindtap="onTemplateTap">防疫登记表模板</view>
+            <mp-cell>
+                <view class="weui-cells__title">{{filename}}</view>
+                <view slot='title' class="weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea" aria-role="button" bindtap="onAddFiles">选择</view>
+            </mp-cell>
+        </mp-cells>
+    </mp-form>
+</mp-form-page>

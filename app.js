@@ -78,8 +78,8 @@ App({
 
   globalData: {
     session: null,
-    BASEURL: 'https://www.td.masterpeak.cn/tdform',
-    // BASEURL: 'https://www1.td.masterpeak.cn',
+    // BASEURL: 'https://www.td.masterpeak.cn/tdform',
+    BASEURL: 'https://www1.td.masterpeak.cn',
     AUTH: 'Basic b3V0c2lkZXI6YWJjZDEyMzQs',///outsider用户
     statusBarHeight: 0,
     // 20220427 添加

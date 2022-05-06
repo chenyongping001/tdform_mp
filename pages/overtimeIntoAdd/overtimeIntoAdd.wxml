@@ -64,7 +64,7 @@
         </view>
       </view>
     </mp-cell>
-    <mp-cells title="外来新增人员情况登记表">
+    <mp-cells title="外来人员疫情防控情况登记表（一人一表）">
       <view slot="footer" class="weui-cells__title weui-cell_link" bindtap="onTemplateTap">防疫登记表模板</view>
       <mp-cell>
         <view class="weui-cells__title">{{filename}}</view>

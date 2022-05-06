@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/load/load",
+        "pages/cheliangRuchang/clrcAdd",
         "pages/outsourcingManagement/workbook/workbookAdd",
         "pages/outsourcingManagement/outsourcingIndex",
         "pages/outsourcingManagement/workbook/workbooks",
