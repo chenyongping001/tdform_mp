@@ -1,0 +1,33 @@
+<!--pages/outsourcingManagement/workbooks.wxml-->
+
+<mp-navigation-bar back="{{false}}" title="车辆临时入厂申报记录" background="#EDEDED">
+    <mp-icon slot='left' icon="back" color="black" bindtap="onBackTap" size="{{15}}"></mp-icon>
+</mp-navigation-bar>
+
+<view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+    <form class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input  type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="searchConfirm"/>
+            <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
+        </view>
+        <label class="weui-search-bar__label" bindtap="showInput">
+            <i class="weui-icon-search"></i>
+            <span class="weui-search-bar__text">搜索</span>
+        </label>
+    </form>
+    <view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+    <view aria-role="button" class="weui-cell__ft search_add" bindtap="onAddTap">添加</view>
+</view>
+
+
+
+<view wx:for="{{list}}" wx:key="id">
+    <mp-cell hover="{{true}}" link="true" data-id="{{item.id}}" bindtap="onRecordItemTap">
+        <view>{{item.cx}}【{{item.cphm}}】-{{item.sgdw}}-{{item.sqly.length<=20?item.sqly:tools.my_slice(item.sqly,0,20)+'...'}}</view>
+                <view class="page__desc">计划进出时间：{{item.jhjcksrq}}--{{item.jhjcjsrq}}
+                </view>
+                <view class="page__desc">状态：<text style="font-size: 1rem; color:{{statusColor[item.status]}}">{{status[item.status]}}</text>
+                </view>
+    </mp-cell>
+</view>

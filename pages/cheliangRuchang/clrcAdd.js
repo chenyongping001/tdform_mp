@@ -15,7 +15,7 @@ Page({
             jhjcjsrq: '',
             cx: '',
             cphm: '',
-            tssgcl:0,
+            tssgcl: 0,
             jsy: '',
             sqly: '',
             dclxrxm: '',
@@ -24,14 +24,14 @@ Page({
         files: [],
         files2: [],
         filename: '',
-        tssgclDesc: ['否','是'],
+        tssgclDesc: ['否', '是'],
         errorMsg: '', // 验证表单显示错误信息
         rules: [{
             name: 'gcmc',
             rules: {
                 required: true,
                 message: '请填写工程项目名称'
-            }, 
+            },
         },
         {
             name: 'sgdw',
@@ -197,6 +197,9 @@ Page({
         } else if (count > 12) {
             msg = '不要上传过多图片!'
         }
+        if (Date.parse(this.data.form.jhjcksrq) > Date.parse(this.data.form.jhjcjsrq)) {
+            msg = '计划进厂开始日期不能晚于晚于结束日期！'
+        }
         if (msg) {
             this.setData({
                 errorMsg: msg
@@ -289,7 +292,7 @@ Page({
                                         isSending: false
                                     })
                                     wx.reLaunch({
-                                        url: '/pages/myOvertimeInto/myOvertimeInto',
+                                        url: '/pages/cheliangRuchang/myClrc',
                                     })
                                 }
                             }
@@ -321,67 +324,67 @@ Page({
         })
     },
 
-onTemplateTap(e) {
-    wx.downloadFile({
-        url: `${app.globalData.BASEURL}/uploads/example.doc`,
-        success: function (res) {
-            const filePath = res.tempFilePath
-            wx.openDocument({
-                showMenu: true,
-                filePath: filePath,
-                success: function (res) {
-                    console.log('打开文档成功')
-                }
-            })
-        }
-    })
-},
-/**
- * 生命周期函数--监听页面初次渲染完成
- */
-onReady: function () {
+    onTemplateTap(e) {
+        wx.downloadFile({
+            url: `${app.globalData.BASEURL}/uploads/example.doc`,
+            success: function (res) {
+                const filePath = res.tempFilePath
+                wx.openDocument({
+                    showMenu: true,
+                    filePath: filePath,
+                    success: function (res) {
+                        console.log('打开文档成功')
+                    }
+                })
+            }
+        })
+    },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
 
-},
+    },
 
-/**
- * 生命周期函数--监听页面显示
- */
-onShow: function () {
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
 
-},
+    },
 
-/**
- * 生命周期函数--监听页面隐藏
- */
-onHide: function () {
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
 
-},
+    },
 
-/**
- * 生命周期函数--监听页面卸载
- */
-onUnload: function () {
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
 
-},
+    },
 
-/**
- * 页面相关事件处理函数--监听用户下拉动作
- */
-onPullDownRefresh: function () {
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
 
-},
+    },
 
-/**
- * 页面上拉触底事件的处理函数
- */
-onReachBottom: function () {
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
 
-},
+    },
 
-/**
- * 用户点击右上角分享
- */
-onShareAppMessage: function () {
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
 
-}
+    }
 })

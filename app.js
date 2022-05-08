@@ -1,4 +1,5 @@
 // app.js
+let uniStorage = require('./utils/uniStorage')
 App({
   onLaunch() {
     wx.getSystemInfo({
@@ -6,8 +7,9 @@ App({
         this.globalData.statusBarHeight = res.statusBarHeight
       }
     })
-    // this.globalData.session = wx.getStorageSync('tdform-session')
-    // this.globalData.hfWxUser = wx.getStorageSync('tdform-hfwxuser')
+    // this.globalData.session = uniStorage.uniGetStorageSync('tdform-session')
+    // this.globalData.hfWxUser = uniStorage.uniGetStorageSync('tdform-hfwxuser')
+    // this.globalData.canWxUserAdd = uniStorage.uniGetStorageSync('tdform-canWxUserAdd')
   },
 
   getSession: function () {
@@ -16,6 +18,13 @@ App({
       if (that.globalData.session) {
         resolve(that.globalData.session)
         return
+      }
+      else{
+        that.globalData.session = uniStorage.uniGetStorageSync('tdform-session')
+        if (that.globalData.session) {
+            resolve(that.globalData.session)
+            return
+          }
       }
       wx.login({
         success: res => {
@@ -30,7 +39,7 @@ App({
                 if (res.statusCode === 200) {
                   let session = res.data.session
                   that.globalData.session = session
-                  // wx.setStorageSync("tdform-session", session)
+                  uniStorage.uniSetStorageSync("tdform-session", session,that.globalData.expiries)
                   resolve(session) //Promise成功的数据传递
                 }
               }
@@ -51,6 +60,13 @@ App({
           resolve(that.globalData.hfWxUser)
           return
         }
+        else{
+            that.globalData.hfWxUser = uniStorage.uniGetStorageSync('tdform-hfwxuser')
+            if (that.globalData.hfWxUser) {
+                resolve(that.globalData.hfWxUser)
+                return
+          }
+        }
         wx.request({
           url: `${that.globalData.BASEURL}/wxauth/wx_getUserFromSession/${res}`,
           header: {
@@ -63,6 +79,9 @@ App({
                 let hfWxUser = res2.data.wx_username
                 that.globalData.hfWxUser = hfWxUser
                 that.globalData.canWxUserAdd= res2.data.can_add
+                uniStorage.uniSetStorageSync("tdform-hfwxuser", hfWxUser,that.globalData.expiries)
+                uniStorage.uniSetStorageSync("tdform-canWxUserAdd", res2.data.can_add,that.globalData.expiries)
+
                 resolve(hfWxUser)
               }
               else {
@@ -78,12 +97,15 @@ App({
 
   globalData: {
     session: null,
-    // BASEURL: 'https://www.td.masterpeak.cn/tdform',
-    BASEURL: 'https://www1.td.masterpeak.cn',
+    BASEURL: 'https://www.td.masterpeak.cn/tdform',
+    // BASEURL: 'https://www1.td.masterpeak.cn',
     AUTH: 'Basic b3V0c2lkZXI6YWJjZDEyMzQs',///outsider用户
     statusBarHeight: 0,
     // 20220427 添加
     hfWxUser: null,
     canWxUserAdd:false,
+    // 20220508添加,本地Storage有效期，以毫秒为单位
+    // 864000000为10天
+    expiries:864000000,
   },
 })

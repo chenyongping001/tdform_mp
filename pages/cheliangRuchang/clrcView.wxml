@@ -1,0 +1,76 @@
+<!--pages/overtimeIntoAdd/overtimeIntoAdd.wxml-->
+
+<mp-form-page title="查看车辆临时入厂申报记录({{recordItem.id}})" subtitle="">
+    <view slot="footer" class="weui-footer__text">Copyright © 2022 chenyongping</view>
+    <view slot="button">
+        <mp-cell>
+                <view  class="weui-btn weui-btn_default" aria-role="button" bindtap="onBackTap">返回</view>
+                <view slot='title' class="weui-btn  weui-btn_warn weui-wa-hotarea" aria-role="button" bindtap="onDeleteTap"  data-id='{{recordItem.id}}' wx:if="{{canDelete}}">删除</view>
+            </mp-cell>
+    </view>
+    <mp-form id="form">
+        <mp-cells title="">
+            <mp-cell title="状态">
+                <view style="color: {{recordItem.statusColor}};">{{recordItem.statusDesc}}</view>
+            </mp-cell>
+            <mp-cell title="*工程名称">
+                <view class="weui-input__placeholder">{{recordItem.gcmc}}</view>
+            </mp-cell>
+            <mp-cell title="*施工单位">
+                <view class="weui-input__placeholder">{{recordItem.sgdw}}</view>
+            </mp-cell>
+            <mp-cell title="*计划进厂开始日期">
+                <view class="weui-input__placeholder">{{recordItem.jhjcksrq}}</view>
+            </mp-cell>
+            <mp-cell title="*计划进厂结束日期">
+                <view class="weui-input__placeholder">{{recordItem.jhjcjsrq}}</view>
+            </mp-cell>
+            <mp-cell title="*车型">
+                <view class="weui-input__placeholder">{{recordItem.cx}}</view>
+            </mp-cell>
+            <mp-cell title="*车牌号码">
+                <view class="weui-input__placeholder">{{recordItem.cphm}}</view>
+            </mp-cell>
+            <mp-cell title="*是否特殊施工车辆">
+                <view class="weui-input__placeholder">{{recordItem.tssgcl===1?"是":"否"}}</view>
+            </mp-cell>
+            <mp-cell title="驾驶员">
+                <view class="weui-input__placeholder">{{recordItem.jsy}}</view>
+            </mp-cell>
+            <mp-cell title="*申请理由">
+                <view class="weui-input__placeholder">{{recordItem.sqly}}</view>
+            </mp-cell>
+            <mp-cell title="*电厂联系人姓名">
+                <view class="weui-input__placeholder">{{recordItem.dclxrxm}}</view>
+            </mp-cell>
+            <mp-cell title="*电厂联系人手机">
+                <view class="weui-input__placeholder">{{recordItem.dclxrsj}}</view>
+            </mp-cell>
+            <mp-cell title="创建时间">
+                <view class="weui-input__placeholder">{{recordItem.create_time}}</view>
+            </mp-cell>
+            <mp-cell title="文档附件" wx:if="{{filePath}}">
+                <view class="weui-cells__title weui-cell_link" bindtap="onFileTap">点击查看</view>
+            </mp-cell>
+
+
+        </mp-cells>
+
+        <mp-cells title="附图({{recordItem.files.length}})"></mp-cells>
+        <mp-cell>
+            <view style="margin-left: 32rpx;">
+                <view class="weui-uploader">
+                    <view class="weui-uploader__bd">
+                        <view class="weui-uploader__files" id="uploaderFiles">
+                            <block wx:for="{{recordItem.files}}" wx:key="index">
+                                <view class="weui-uploader__file" data-index="{{index}}" bindtap="previewImage" id="{{baseurl+item}}">
+                                    <image class="weui-uploader__img" src="{{baseurl+item}}" mode="aspectFill" />
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </mp-cell>
+    </mp-form>
+</mp-form-page>

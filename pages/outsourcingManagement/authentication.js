@@ -34,7 +34,10 @@ Page({
           if (res.data.wx_username) {
             let hfWxUser = res.data.wx_username
             app.globalData.hfWxUser = hfWxUser
+            app.globalData.canWxUserAdd= res.data.can_add
             // wx.setStorageSync("tdform-hfwxuser", hfWxUser)
+            uniStorage.uniSetStorageSync("tdform-hfwxuser", session,app.globalData.expiries)
+            uniStorage.uniSetStorageSync("tdform-canWxUserAdd", session,app.globalData.expiries)
             wx.navigateBack({
               delta: 1,
             })

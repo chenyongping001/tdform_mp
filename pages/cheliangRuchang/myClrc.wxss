@@ -1,0 +1,5 @@
+/* pages/outsourcingManagement/workbooks.wxss */
+.search_add{
+    padding-right: 0.3rem;
+    padding-left: 0.6rem;
+}

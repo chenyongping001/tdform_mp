@@ -1,7 +1,7 @@
 <!--pages/overtimeIntoAdd/overtimeIntoAdd.wxml-->
 <wxs src='../../../utils/string.wxs' module="tools"></wxs>
 
-<mp-form-page title="查看工作记录-({{workbook.id}})" subtitle="">
+<mp-form-page title="查看工作记录({{workbook.id}})" subtitle="">
   <view slot="footer" class="weui-footer__text">Copyright © 2022 chenyongping</view>
   <view slot="button">
     <button class="weui-btn" type="primary"  bindtap="weSubmitForm">返回</button>
@@ -37,6 +37,9 @@
       </mp-cell>
       <mp-cell title="技巧分享">
         <view class="weui-input__placeholder">{{workbook.jqfx}}</view>
+      </mp-cell>
+      <mp-cell title="记录时间">
+        <view class="weui-input__placeholder">{{workbook.create_time}}</view>
       </mp-cell>
     </mp-cells>
 
