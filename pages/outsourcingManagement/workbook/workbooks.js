@@ -1,3 +1,4 @@
+import { uniGetStorageSync } from "../../../utils/uniStorage"
 
 const app = getApp()
 Page({

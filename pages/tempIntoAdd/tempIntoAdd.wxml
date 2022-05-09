@@ -8,7 +8,7 @@
     <form bindsubmit="formSubmit">
       <view class="weui-form__text-area">
         <h2 class="weui-form__title">无卡临时入厂申报</h2>
-        <view class="weui-form__desc">疫情防控需要，外来人员必须上传当天健康码、行程轨迹图以及身份证的附件资料，14天内有外省经历人员还需提供核酸检测报告,并尽可能上传外来新增人员情况登记表。表中的临时入厂人员信息用于门岗核实，填报的内容将发送至电厂联系人走流程，请务必准确填写。</view>
+        <view class="weui-form__desc">疫情防控需要，外来人员必须提供身份证明，以及当天健康码、行程卡以及核酸阴性证明,并上传防疫登记表。表中的临时入厂人员信息用于门岗核实，填报的内容将发送至电厂联系人走流程，请务必准确填写。</view>
       </view>
       <view class="weui-form__control-area">
         <view class="weui-cells__group weui-cells__group_form">
@@ -113,7 +113,7 @@
         </view>
 
         <view class="weui-cells__group weui-cells__group_form">
-          <view class="weui-cells__title">(*)健康码、行程卡、身份证、核酸证明等附件({{files.length}})</view>
+          <view class="weui-cells__title">(*)身份证明、疫情防控证明等附件({{files.length}})</view>
           <view class="weui-cells weui-cells_form">
             <view class="weui-cell weui-cell_uploader">
               <view class="weui-cell__bd">

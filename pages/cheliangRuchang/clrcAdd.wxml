@@ -54,7 +54,7 @@
                 <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.dclxrsj}}" data-field="dclxrsj" placeholder="准确填写电厂员工手机" type="number" />
             </mp-cell>
         </mp-cells>
-        <mp-cells title="行驶证、身份证、健康码、行程卡、核酸证明等附件({{files.length}})"></mp-cells>
+        <mp-cells title="入厂车辆和人员证明、疫情防控证明等附件({{files.length}})"></mp-cells>
         <mp-cell>
             <view style="margin-left: 32rpx;">
                 <view class="weui-uploader">

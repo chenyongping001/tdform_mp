@@ -1,5 +1,5 @@
 <!--pages/overtimeIntoAdd/overtimeIntoAdd.wxml-->
-<mp-form-page title="有卡超时再入厂申报" subtitle="首先请确认您已办证且证件还在有效期内。由于您较长时间未进厂，再入厂必须上传当天健康码、行程轨迹图等附件资料，14天内有外省经历人员还需提供核酸检测报告。并尽可能上传防疫登记表。">
+<mp-form-page title="有卡超时再入厂申报" subtitle="首先请确认您已办证且证件还在有效期内。由于您较长时间未进厂，再入厂必须上传当天健康码、行程卡、提供核酸检测报告等附件资料，并上传防疫登记表。">
   <view slot="footer" class="weui-footer__text">Copyright © 2021 chenyongping</view>
   <view slot="button">
     <button class="weui-btn" type="primary"  disabled="{{isSending}}" bindtap="weSubmitForm">提交</button>
@@ -42,7 +42,7 @@
         <input class="weui-input" placeholder-class="weui-input__placeholder" bindinput="formInputChange" value="{{form.contactPhone}}" data-field="contactPhone" placeholder="准确填写电厂员工手机" type="number" />
       </mp-cell>
     </mp-cells>
-    <mp-cells title="(*)健康码、行程卡、核酸证明等附件({{files.length}})"></mp-cells>
+    <mp-cells title="(*)疫情防控证明附件({{files.length}})"></mp-cells>
     <mp-cell>
       <view style="margin-left: 32rpx;">
         <view class="weui-uploader">

@@ -62,6 +62,7 @@ App({
         }
         else{
             that.globalData.hfWxUser = uniStorage.uniGetStorageSync('tdform-hfwxuser')
+            that.globalData.canWxUserAdd = uniStorage.uniGetStorageSync('tdform-canWxUserAdd')
             if (that.globalData.hfWxUser) {
                 resolve(that.globalData.hfWxUser)
                 return
@@ -77,10 +78,11 @@ App({
             if (res2.statusCode === 200) {
               if (res2.data.wx_username) {
                 let hfWxUser = res2.data.wx_username
+                let canWxUserAdd = res2.data.can_add
                 that.globalData.hfWxUser = hfWxUser
-                that.globalData.canWxUserAdd= res2.data.can_add
+                that.globalData.canWxUserAdd= canWxUserAdd
                 uniStorage.uniSetStorageSync("tdform-hfwxuser", hfWxUser,that.globalData.expiries)
-                uniStorage.uniSetStorageSync("tdform-canWxUserAdd", res2.data.can_add,that.globalData.expiries)
+                uniStorage.uniSetStorageSync("tdform-canWxUserAdd", canWxUserAdd,that.globalData.expiries)
 
                 resolve(hfWxUser)
               }
