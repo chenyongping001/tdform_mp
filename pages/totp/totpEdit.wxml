@@ -2,11 +2,11 @@
 <form bindsubmit="keySubmit">
   <view class="input-box">
     <text>名称</text>
-    <input name="issuer" placeholder="账号名称" placeholder-style="color: #666; font-size: 1rem;" value="{{issuer}}"/>
+    <input name="issuer" placeholder="账号名称" placeholder-style="color: #666; font-size: 1rem;" value="{{token.isuser}}" bindinput="formInputChange"  data-field="isuser"/>
   </view>
   <view class="input-box">
     <text>备注</text>
-    <input name="remark" placeholder="帐号备注" placeholder-style="color: #666; font-size: 1rem;" value="{{remark}}"/>
+    <input name="remark" placeholder="帐号备注" placeholder-style="color: #666; font-size: 1rem;" value="{{token.remark}}" bindinput="formInputChange"  data-field="remark"/>
   </view>
   <!-- <view class="input-box">
     <text>KEY</text>

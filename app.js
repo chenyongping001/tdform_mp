@@ -107,7 +107,7 @@ App({
     hfWxUser: null,
     canWxUserAdd:false,
     // 20220508添加,本地Storage有效期，以毫秒为单位
-    // 864000000为10天
-    expiries:864000000,
+    // 86400000为1天
+    expiries:86400000,
   },
 })

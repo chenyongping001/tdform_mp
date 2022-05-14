@@ -1,53 +1,55 @@
 // pages/edit/edit.js
 let util = require('../../utils/util')
-let token = []
-let token_id
+const app = getApp()
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    issuer: '',
-    remark: '',
-    secret:''
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        token: null,
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let self = this
-    token_id = options.token_id
-    wx.getStorage({
-      key: 'dlgf-totps',
-      success: function(res) {
-        token = res.data
-        let target_token = token[token_id]
-        self.setData({
-          issuer: target_token.issuer,
-          remark: target_token.remark,
-          secret: target_token.secret
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        let token = JSON.parse(options.token)
+        this.setData({
+            token: token
         })
-      }
-    })
-  },
+    },
 
-  // 修改并提交数据
-  keySubmit: function (e) {
-    let values = e.detail.value
-    token[token_id].issuer = values.issuer
-    token[token_id].remark = values.remark
-
-    wx.setStorage({
-      key: 'dlgf-totps',
-      data: token,
-      success: function(res) {
-        wx.navigateBack({
-          delta: 1,
+    formInputChange(e) {
+        const {
+            field
+        } = e.currentTarget.dataset
+        this.setData({
+            [`token.${field}`]: e.detail.value
         })
-      }
-    });
-  }
+    },
+    // 修改并提交数据
+    keySubmit: function (e) {
+        wx.request({
+            url: `${app.globalData.BASEURL}/wxauth/useful_totp/`,
+            header: {
+                'Authorization': app.globalData.AUTH,
+                'content-type': 'application/json'
+            },
+            data: {
+                id: this.data.token.id,
+                isuser: this.data.token.isuser,
+                remark: this.data.token.remark,
+            },
+            method: "POST",
+            success(res) {
+                if (res.statusCode === 200) {
+                    wx.redirectTo({
+                        url: 'totpIndex',
+                      })
+                }
+            },
+        })
+    }
 
 })

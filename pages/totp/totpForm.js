@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    token: null,
   },
 
   /**
@@ -22,12 +22,19 @@ Page({
   onReady: function () {
   
   },
+  formInputChange(e) {
+    const {
+        field
+    } = e.currentTarget.dataset
+    this.setData({
+        [`token.${field}`]: e.detail.value
+    })
+},
 
   /**
    * 提交数据
    */
   keySubmit: function (e) {
-    let values = e.detail.value
-    util.addToken(values, "man")
+    util.addToken(this.data.token, "man")
   }
 })

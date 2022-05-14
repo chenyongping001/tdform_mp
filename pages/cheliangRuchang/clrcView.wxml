@@ -4,8 +4,8 @@
     <view slot="footer" class="weui-footer__text">Copyright © 2022 chenyongping</view>
     <view slot="button">
         <mp-cell>
-            <view class="weui-btn weui-btn_default" aria-role="button" bindtap="onBackTap">返回</view>
-            <view slot='title' class="weui-btn  weui-btn_warn weui-wa-hotarea" aria-role="button" bindtap="onDeleteTap" data-id='{{recordItem.id}}' wx:if="{{canDelete}}">删除</view>
+            <view class="weui-btn weui-btn_primary" aria-role="button" bindtap="onBackTap">返回</view>
+            <view slot='title' class="weui-btn  weui-btn_warn weui-btn_mini weui-wa-hotarea" aria-role="button" bindtap="onDeleteTap" data-id='{{recordItem.id}}' wx:if="{{canDelete}}">删除</view>
         </mp-cell>
     </view>
     <mp-form id="form">

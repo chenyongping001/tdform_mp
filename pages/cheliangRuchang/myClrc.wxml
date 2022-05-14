@@ -1,6 +1,6 @@
 <!--pages/outsourcingManagement/workbooks.wxml-->
 
-<mp-navigation-bar back="{{false}}" title="车辆临时入厂申报记录" background="#EDEDED">
+<mp-navigation-bar back="{{false}}" title="车辆临时入厂申报" background="#EDEDED">
     <mp-icon slot='left' icon="back" color="black" bindtap="onBackTap" size="{{15}}"></mp-icon>
 </mp-navigation-bar>
 
