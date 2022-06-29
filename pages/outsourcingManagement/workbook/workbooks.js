@@ -12,15 +12,15 @@ Page({
         nextPage: 1,
 
         // 检测是否到底加载，避免多次加载
-        isReachBottom:false,
+        isReachBottom: false,
 
         // 是否可添加
-        canWxUserAdd:false,
+        canWxUserAdd: false,
 
         // 搜索框使用
         inputShowed: false,
         inputVal: '',
-        isNewSearch:false,
+        isNewSearch: false,
     },
 
     /**
@@ -32,37 +32,35 @@ Page({
 
     addPageToList() {
         const that = this
-        app.getSession().then(function (session) {
-            wx.request({
-                url: `${app.globalData.BASEURL}/outsourcingManagement/workbooks/?search=${that.data.inputVal}&pagesize=${that.data.pagesize}&page=${that.data.nextPage}`,
-                header: {
-                    'Authorization': app.globalData.AUTH,
-                    'content-type': 'application/json'
-                },
-                success: function (res) {
-                    if (res.statusCode === 200) {
-                        let list_pre = that.data.workbookList ? that.data.workbookList : []
-                        if(that.data.isNewSearch){
-                            list_pre = []
-                            that.setData({
-                                isNewSearch:false
-                            })
-                        }
-                        let list_new = res.data
-                        if (list_new.length > 0) {
-                            let list = list_pre.concat(list_new)
-                            that.setData({
-                                workbookList: list,
-                            })
-                        }
-                        else {
-                            that.setData({
-                                isReachBottom:true
-                            })
-                        }
+        wx.request({
+            url: `${app.globalData.BASEURL}/outsourcingManagement/workbooks/?search=${that.data.inputVal}&pagesize=${that.data.pagesize}&page=${that.data.nextPage}`,
+            header: {
+                'Authorization': app.globalData.AUTH,
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+                if (res.statusCode === 200) {
+                    let list_pre = that.data.workbookList ? that.data.workbookList : []
+                    if (that.data.isNewSearch) {
+                        list_pre = []
+                        that.setData({
+                            isNewSearch: false
+                        })
+                    }
+                    let list_new = res.data
+                    if (list_new.length > 0) {
+                        let list = list_pre.concat(list_new)
+                        that.setData({
+                            workbookList: list,
+                        })
+                    }
+                    else {
+                        that.setData({
+                            isReachBottom: true
+                        })
                     }
                 }
-            })
+            }
         })
 
     },
@@ -74,16 +72,16 @@ Page({
             url: `/pages/outsourcingManagement/workbook/workbookView?workbook=${workbook_str}`,
         })
     },
-    onAddTap(e){
+    onAddTap(e) {
         wx.navigateTo({
-          url: '/pages/outsourcingManagement/workbook/workbookAdd',
+            url: '/pages/outsourcingManagement/workbook/workbookAdd',
         })
     },
     onBackTap(e) {
         wx.reLaunch({
-          url: '/pages/outsourcingManagement/outsourcingIndex',
+            url: '/pages/outsourcingManagement/outsourcingIndex',
         })
-      },
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -98,7 +96,7 @@ Page({
     onShow: function () {
         getApp().getUserFromSession().then(res => {
             this.setData({
-                canWxUserAdd:app.globalData.canWxUserAdd,
+                canWxUserAdd: app.globalData.canWxUserAdd,
             })
         }).catch(function (err) {
             wx.navigateTo({
@@ -132,7 +130,7 @@ Page({
      */
     onReachBottom: function () {
         let that = this
-        if(that.data.isReachBottom){
+        if (that.data.isReachBottom) {
             return
         }
         wx.request({
@@ -150,15 +148,15 @@ Page({
                         })
                         that.addPageToList()
                     }
-                    else{
+                    else {
                         that.setData({
-                            isReachBottom:true
-                        }) 
+                            isReachBottom: true
+                        })
                         wx.showToast({
                             title: "没有更多数据了",
                             icon: 'none',
                             duration: 1000
-                        })                
+                        })
                     }
                 }
             }
@@ -181,9 +179,9 @@ Page({
         this.setData({
             inputVal: '',
             inputShowed: false,
-            isNewSearch:true,
-            nextPage:1,
-            isReachBottom:false,
+            isNewSearch: true,
+            nextPage: 1,
+            isReachBottom: false,
         });
         this.addPageToList()
     },
@@ -197,11 +195,11 @@ Page({
             inputVal: e.detail.value,
         });
     },
-    searchConfirm(){
+    searchConfirm() {
         this.setData({
-            isNewSearch:true,
-            nextPage:1,
-            isReachBottom:false,
+            isNewSearch: true,
+            nextPage: 1,
+            isReachBottom: false,
         })
         this.addPageToList()
     }
